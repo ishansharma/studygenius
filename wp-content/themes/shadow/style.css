@@ -1,0 +1,11 @@
+/*
+Theme Name: Shadow
+Theme URI: http://ishan.co/
+Description: Child Theme for Foxy Theme. Developed for Study Genius
+Author: Ishan
+Author URI: http://ishan.co
+Template: foxy
+Version: 0.1
+*/ 
+
+@import url("../Foxy/style.css")
