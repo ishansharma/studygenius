@@ -37,7 +37,7 @@
 	</div> <!-- #footer-area -->
 
 	<div id="footer-bottom-area" class="container">
-		<p id="copyright"><?php printf( __( 'Copyright &copy; 2013 &middot; Study Genius', 'Foxy' )); ?></p>
+		<p id="copyright"><?php printf( __( 'Copyright &copy; 2014 &middot; <a href="http://studygeni.us">Study Genius</a>', 'Foxy' )); ?></p>
 	</div>
 
 	<?php wp_footer(); ?>
