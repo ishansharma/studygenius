@@ -1,4 +1,5 @@
 <?php
+	/* Display all child pages for current page */
 	add_shortcode('child_pages', 'list_child_pages');
 	function list_child_pages() {
 		// Initiate Child List, This string will be returned at the end. 
@@ -26,4 +27,29 @@
 		// We're done. 
 		return $child_list;
 	}
+
+	/* Remove Unused Admin Menu Items */
+	function remove_unused_menu_items() {
+		remove_menu_page('edit.php'); // Posts
+		remove_menu_page('edit-comments.php'); // Comments
+		remove_menu_page('edit.php?post_type=testimonial'); // Testimonials
+	}
+	add_action('admin_menu', 'remove_unused_menu_items');
+
+	/* Reordering the Admin Menu */
+	function reorder_admin_menu($menu_ord) {
+		if(!$menu_ord) return true;
+
+		return array(
+			'index.php', // Dashboard
+			'separator1', // Seperator
+			'edit.php?post_type=subject', // Subjects
+			'edit.php?post_type=note', // Notes
+			'edit.php?post_type=page', // Pages
+			'upload.php', // Media Library
+			);
+	}
+
+	add_filter('custom_menu_order', 'reorder_admin_menu');
+	add_filter('menu_order', 'reorder_admin_menu');
 ?>
