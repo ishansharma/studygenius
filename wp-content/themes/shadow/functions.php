@@ -52,4 +52,17 @@
 
 	add_filter('custom_menu_order', 'reorder_admin_menu');
 	add_filter('menu_order', 'reorder_admin_menu');
+
+	/* Removing Columns from Post Table */
+	function remove_unused_fields($columns) {
+		unset( $columns['wpseo-score'] );
+		unset( $columns['wpseo-title'] );
+		unset( $columns['wpseo-metadesc'] );
+		unset( $columns['wpseo-focuskw'] );
+
+		return $columns;
+	}
+
+	add_filter('manage_edit-note_columns', remove_unused_fields);
+	add_filter('manage_edit-subject_columns', remove_unused_fields);
 ?>
