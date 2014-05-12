@@ -43,8 +43,8 @@ wp-content/*
 # specify (see the commented-out examples for hints on how to do this.)
 #############################
 wp-content/plugins/*
-# !wp-content/plugins/my-single-file-plugin.php
-# !wp-content/plugins/my-directory-plugin/
+!wp-content/plugins/sg-content-access/
+!wp-content/plugins/sg-login-redirect/
 
 #############################
 # Ignore everything in the "themes" directory, except the themes you
