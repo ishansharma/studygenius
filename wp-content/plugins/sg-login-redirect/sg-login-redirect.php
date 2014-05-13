@@ -26,7 +26,7 @@
 
 add_filter('login_redirect', 'sg_handle_login');
 
-function sg_handle_login($redirect_to, $request, $user) {
+function sg_handle_login($redirect_to) {
 	// Calling global variable to access current user info
 	global $user;
 	// Check if user roles are defined and array is set

@@ -82,4 +82,11 @@
 			}
 		}
 	}
+
+	/* Removing Customer Roles */
+	remove_role('subscriber');
+	remove_role('contributor');
+	remove_role('author');
+	remove_role('editor');
+	remove_role('premise_member');
 ?>
