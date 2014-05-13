@@ -27,28 +27,27 @@
 add_filter('the_content', 'verify_user_access');
 
 function verify_user_access($content) {
-    // Calling Global user object into scope
-    global $user;
+    $current_user = wp_get_current_user();
     // Calling Global post object into scope
     global $post;
     // Check if user is logged in and has a role
-    if (isset($user->roles) && is_array($user->roles)) {
+    if (isset($current_user->roles) && ($post->post_type == 'note')) {
         // Confirm that user is a student
-        if(in_array('student', $user->roles)) {
-            // At this point, we know that the user is a student.
-            $user_type = student;
+        if(in_array('student', $current_user->roles)) {
             // Getting the student's course
-            $student_course = get_user_meta($user->ID, 'wpcf-student-course', 'true');
-            $student_branch = get_user_meta($user->ID, 'wpcf-student-course-branch', 'true');
+            $student_course = get_user_meta($current_user->ID, 'wpcf-student-course', 'true');
+            $student_branch = get_user_meta($current_user->ID, 'wpcf-student-course-branch', 'true');
         }
         $post_taxonomies = wp_get_post_terms($post->ID, 'course');
         // We have the student course, branch and post taxonomy. If branch and taxonomy match, we are good to go.
-        if (in_array($student_branch, $post_taxonomies)) {
-            return $content;
+        for ($i = 0; $i < 10; $i++) {
+            if($student_branch == $post_taxonomies[$i]->slug) {
+                return $content;
+            }
         }
-        else {
-            return 'You are not allowed to access these notes. If this is in error, please contact IT Support';
-        }
+        $not_allowed_text = 'You are not allowed to access these notes. If this is in error, please contact Support.';
+        return $not_allowed_text;
+
     }
     else {
         // Let WordPress take care of the access

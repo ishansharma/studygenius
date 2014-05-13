@@ -65,4 +65,21 @@
 
 	add_filter('manage_edit-note_columns', remove_unused_fields);
 	add_filter('manage_edit-subject_columns', remove_unused_fields);
+
+	/* Student Link Shortcode */
+	add_shortcode('studentnotelink', 'generate_studentnotelink');
+
+	function generate_studentnotelink($atts) {
+		$current_user = wp_get_current_user();
+		if (isset($current_user->roles)) {
+			if(in_array('student', $current_user->roles)) {
+				$site_address = get_bloginfo('url');
+				$student_course = get_user_meta($current_user->ID, 'wpcf-student-course', 'true');
+           		$student_branch = get_user_meta($current_user->ID, 'wpcf-student-course-branch', 'true');
+				$return_address = $site_address . '/course/' . $student_course . '/' . $student_branch;
+				$return_content = '<a href ="' . $return_address . '">Check Notes</a>';
+				return $return_content;
+			}
+		}
+	}
 ?>
